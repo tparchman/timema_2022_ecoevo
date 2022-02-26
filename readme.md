@@ -1,9 +1,17 @@
-## Desert tortoise analysis notes
+## 2021/2022 T. cristinae GBS workflow 
 
-### Notes on contaminant cleaning and barcode parsing 10-30
+To expedite and streamline current and future Timema DNA extractions, we worked with AGBIO to develop a method for rapid insect DNA extraction. We performed these extractions in September of 2021. Quality and quantity looked decent, but yields were lower than we generally get with the Qiagen DNeasy kits. 
 
-`NOTE`: One library was sequenced on one Novaseq lane in late September of 2021
-`NOTE`: Contaminant cleaning and barcode parsing in `/working/parchman/GOAG/`
+We made 3 GBS libraries in December 2021 that covered 1800 T. cristinae samples, and included a small number of Pinus rigida in each. In order to make sure that the AGBIO DNA extractions performed consistently, we ran one of these libraries (T5_PC) on two lanes of NovaSeq S1 chemistry, which produces an amount of data similar to one lane on the NovaSeq with S2.
+
+Raw data is stored on ponderosa at:
+`/archive/parchman_lab/rawdata_to_backup/T5_PC`
+
+### Notes on contaminant cleaning and barcode parsing 2/22
+
+`NOTE`: 2 S1 lanes on GSAF NovaSeq during 2/22/ 
+`NOTE`: Contaminant cleaning and barcode parsing in `/working/parchman/Tcristinae_2022`
+working first just with the first lane `T5_S1_L001_R1_001.fastq`
 
 ### This file contains code and notes for
 1) cleaning contaminants using tapioca
