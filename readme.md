@@ -1,8 +1,8 @@
-## 2021/2022 T. cristinae GBS workflow 
+## 2021/2022 *T. cristinae* GBS workflow 
 
 To expedite and streamline current and future Timema DNA extractions, we worked with AGBIO to develop a method for rapid insect DNA extraction. We performed these extractions in September of 2021. Quality and quantity looked decent, but yields were lower than we generally get with the Qiagen DNeasy kits. 
 
-We made 3 GBS libraries in December 2021 that covered 1800 T. cristinae samples, and included a small number of Pinus rigida in each. In order to make sure that the AGBIO DNA extractions performed consistently, we ran one of these libraries (T5_PC) on two lanes of NovaSeq S1 chemistry, which produces an amount of data similar to one lane on the NovaSeq with S2.
+We made 3 GBS libraries in December 2021 that covered 1800 *T. cristinae* samples, and included a small number of Pinus rigida in each. In order to make sure that the AGBIO DNA extractions performed consistently, we ran one of these libraries (T5_PC) on two lanes of NovaSeq S1 chemistry, which produces an amount of data similar to one lane on the NovaSeq with S2.
 
 Raw data is stored on ponderosa at:
 `/archive/parchman_lab/rawdata_to_backup/T5_PC`
@@ -10,8 +10,7 @@ Raw data is stored on ponderosa at:
 ### Notes on contaminant cleaning and barcode parsing 2/22
 
 `NOTE`: 2 S1 lanes on GSAF NovaSeq during 2/22/ 
-`NOTE`: Contaminant cleaning and barcode parsing in `/working/parchman/Tcristinae_2022`
-working first just with the first lane `T5_S1_L001_R1_001.fastq`
+`NOTE`: Contaminant cleaning and barcode parsing in `/working/parchman/Tcristinae_2022`. Working first just with the first lane `T5_S1_L001_R1_001.fastq` in order to evaluate consistency of coverage across samples.
 
 ### This file contains code and notes for
 1) cleaning contaminants using tapioca
@@ -23,7 +22,7 @@ working first just with the first lane `T5_S1_L001_R1_001.fastq`
 
 ## Cleaning contaminants
 
-Being executed on ponderosa using tapioca pipeline. Commands in bash script, executed as below (10/16/21).
+Being executed on ponderosa using tapioca pipeline. Commands in bash script, executed as below (2/26/22).
 
     $ module load fqutils/0.4.1
     $ module load bowtie2/2.2.5
