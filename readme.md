@@ -7,11 +7,6 @@ We made 3 GBS libraries in December 2021 that covered 1800 *T. cristinae* sample
 Raw data is stored on ponderosa at:
 `/archive/parchman_lab/rawdata_to_backup/T5_PC`
 
-### Notes on contaminant cleaning and barcode parsing 2/22
-
-`NOTE`: 2 S1 lanes on GSAF NovaSeq during 2/22/ 
-`NOTE`: Contaminant cleaning and barcode parsing in `/working/parchman/Tcristinae_2022`. Working first just with the first lane `T5_S1_L001_R1_001.fastq` in order to evaluate consistency of coverage across samples.
-
 ### This file contains code and notes for
 1) cleaning contaminants using tapioca
 2) parsing barcodes
@@ -19,6 +14,11 @@ Raw data is stored on ponderosa at:
 4) 
 6) 
 7) 
+
+## Notes on contaminant cleaning and barcode parsing 2/22
+
+`NOTE`: 2 S1 lanes on GSAF NovaSeq during 2/22/ 
+`NOTE`: Contaminant cleaning and barcode parsing in `/working/parchman/Tcristinae_2022`. Working first just with the first lane `T5_S1_L001_R1_001.fastq` in order to evaluate consistency of coverage across samples.
 
 ## Cleaning contaminants
 
@@ -34,21 +34,23 @@ After GOAG.clean.fastq has been produced, clean out duplicate raw data:
  
 Number of reads **before** cleaning:
 
-    $ grep -c "^@" GOAG-lib10_S1_L001_R1_001.fastq > number_of_rawreads.txt
+    $ grep -c "^@" T5_S1_L001_R1_001.fastq > number_of_rawreads.txt &
     $ less number_of_rawreads.txt
-    # 2352951075
-    
+    # 
 Number of reads **after** cleaning:
 
-    $ grep -c "^@" GOAG.clean.fastq > number_of_cleanreads.txt
+    $ grep -c "^@" T5_PC.clean.fastq > number_of_cleanreads.txt &
     $ less number_of_cleanreads.txt
     # 
 
+# DONE TO HERE
+
+
 ## Barcode parsing:
 
-Barcode keyfile is `/working/parchman/GOAG/XXXXXXXXX_bcode.csv`
+Barcode keyfile is `/working/parchman/Tcristinae_2022/barcodeKey_lib11_timema5_pineC.csv`
   
-    $ perl parse_barcodes768.pl barcodeKey_CLEAN_desertTortoises.csv GOAG.clean.fastq A00 &
+    $ perl parse_barcodes768.pl barcodeKey_lib11_timema5_pineC.csv T5_PC.clean.fastq A00 &
 
 `NOTE`: the A00 object is the code that identifies the sequencer (first three characters after the @ in the fastq identifier).
 
