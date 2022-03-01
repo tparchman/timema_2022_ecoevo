@@ -55,10 +55,10 @@ Barcode keyfile is `/working/parchman/Tcristinae_2022/barcodeKey_lib11_timema5_p
 `NOTE`: the A00 object is the code that identifies the sequencer (first three characters after the @ in the fastq identifier).
 
     $ less parsereport_GOAG.clean.fastq
-    #Good mids count: 1549613635
-    #Bad mids count: 52409522
-    #Number of seqs with potential MSE adapter in seq: 448456
-    #Seqs that were too short after removing MSE and beyond: 137
+    Good mids count: 521146575
+    Bad mids count: 38505020
+    Number of seqs with potential MSE adapter in seq: 193168
+    Seqs that were too short after removing MSE and beyond: 317
 
 
 Cleaning up the directory:
