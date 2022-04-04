@@ -43,6 +43,30 @@ Number of reads **after** cleaning:
     $ less number_of_cleanreads.txt
     # 
 
+`NOTE`: All looked well with `T5_S1_L001_R1_001.fastq`, below processing cleaning step for `T5_S1_L002_R1_001.fastq`.
+
+Being executed on ponderosa using tapioca pipeline. Commands in bash script, executed as below (4/2/22).
+
+    $ module load fqutils/0.4.1
+    $ module load bowtie2/2.2.5
+    $ bash cleaning_bash.sh &
+
+After GOAG.clean.fastq has been produced, clean out duplicate raw data:
+
+    $ rm -rf T5_S1_L002_R1_001.fastq
+ 
+Number of reads **before** cleaning:
+
+    $ grep -c "^@" T5_S1_L002_R1_001.fastq > number_of_rawreadsB.txt &
+    $ less number_of_rawreadsB.txt
+    # 
+Number of reads **after** cleaning:
+
+    $ grep -c "^@" B_T5_PC.clean.fastq > number_of_cleanreadsB.txt &
+    $ less number_of_cleanreadsB.txt
+    # 
+
+
 # DONE TO HERE
 
 
