@@ -67,22 +67,27 @@ Number of reads **after** cleaning:
     # 
 
 
-# DONE TO HERE
 
 
 ## Barcode parsing:
 
 Barcode keyfile is `/working/parchman/Tcristinae_2022/barcodeKey_lib11_timema5_pineC.csv`
-  
+
+2 lanes need to be parsed:
+`T5_PC.clean.fastq` and  `B_T5_PC.clean.fastq`
+
     $ perl parse_barcodes768.pl barcodeKey_lib11_timema5_pineC.csv T5_PC.clean.fastq A00 &
+
+    $ perl parse_barcodes768.pl barcodeKey_lib11_timema5_pineC.csv B_T5_PC.clean.fastq A00 &
+
+
+# DONE TO HERE
+
 
 `NOTE`: the A00 object is the code that identifies the sequencer (first three characters after the @ in the fastq identifier).
 
     $ less parsereport_GOAG.clean.fastq
-    Good mids count: 521146575
-    Bad mids count: 38505020
-    Number of seqs with potential MSE adapter in seq: 193168
-    Seqs that were too short after removing MSE and beyond: 317
+    Good mids count: 
 
 
 Cleaning up the directory:
