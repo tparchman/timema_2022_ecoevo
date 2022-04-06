@@ -100,6 +100,9 @@ Each fastq file has data for the same set of individuals. Combining those two fi
 
     $ cat T5_PC.clean.fastq B_T5_PC.clean.fastq > T3_pineC.fastq
 
+# DONE TO HERE
+
+
 Cleaning up the directory:
 
     $ rm T5_PC.clean.fastq
@@ -109,6 +112,9 @@ Cleaning up the directory:
     $ rm B_T5_PC.clean.fastq
     $ rm miderrors_B_T5_PC.clean.fastq
     $ rm parsereport_B_T5_PC.clean.fastq
+
+# DONE TO HERE
+
 
 ## Splitting fastq by individual ID
 
