@@ -83,11 +83,17 @@ Barcode keyfile is `/working/parchman/Tcristinae_2022/barcodeKey_lib11_timema5_p
 
 `NOTE`: the A00 object is the code that identifies the sequencer (first three characters after the @ in the fastq identifier).
 
+    $ less parsereport_B_T5_PC.clean.fastq
+    #Good mids count: 520687693
+    #Bad mids count: 37522471
+    #Number of seqs with potential MSE adapter in seq: 200352
+    #Seqs that were too short after removing MSE and beyond: 354
+
     $ less parsereport_T5_PC.clean.fastq
-
-
-    $ less parsereport_T5_PC.clean.fastq
-
+    #Good mids count: 521146575
+    #Bad mids count: 38505020
+    #Number of seqs with potential MSE adapter in seq: 193168
+    #Seqs that were too short after removing MSE and beyond: 317
 
 
 Each fastq file has data for the same set of individuals. Combining those two files here with `cat` to make one file with all data:
