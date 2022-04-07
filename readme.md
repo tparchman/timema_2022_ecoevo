@@ -66,44 +66,69 @@ Number of reads **after** cleaning:
     $ less number_of_cleanreadsB.txt
     # 
 
+## Barcode parsing:
+
+Barcode keyfile is `/working/parchman/Tcristinae_2022/barcodeKey_lib11_timema5_pineC.csv`
+
+2 lanes need to be parsed:
+`T5_PC.clean.fastq` and  `B_T5_PC.clean.fastq`
+
+    $ perl parse_barcodes768.pl barcodeKey_lib11_timema5_pineC.csv T5_PC.clean.fastq A00 &
+
+    $ perl parse_barcodes768.pl barcodeKey_lib11_timema5_pineC.csv B_T5_PC.clean.fastq A00 &
+
 
 # DONE TO HERE
 
 
-## Barcode parsing:
-
-Barcode keyfile is `/working/parchman/Tcristinae_2022/barcodeKey_lib11_timema5_pineC.csv`
-  
-    $ perl parse_barcodes768.pl barcodeKey_lib11_timema5_pineC.csv T5_PC.clean.fastq A00 &
-
 `NOTE`: the A00 object is the code that identifies the sequencer (first three characters after the @ in the fastq identifier).
 
-    $ less parsereport_GOAG.clean.fastq
-    Good mids count: 521146575
-    Bad mids count: 38505020
-    Number of seqs with potential MSE adapter in seq: 193168
-    Seqs that were too short after removing MSE and beyond: 317
+    $ less parsereport_B_T5_PC.clean.fastq
+    #Good mids count: 520687693
+    #Bad mids count: 37522471
+    #Number of seqs with potential MSE adapter in seq: 200352
+    #Seqs that were too short after removing MSE and beyond: 354
+
+    $ less parsereport_T5_PC.clean.fastq
+    #Good mids count: 521146575
+    #Bad mids count: 38505020
+    #Number of seqs with potential MSE adapter in seq: 193168
+    #Seqs that were too short after removing MSE and beyond: 317
+
+
+Each fastq file has data for the same set of individuals. Combining those two files here with `cat` to make one file with all data:
+
+    $ cat T5_PC.clean.fastq B_T5_PC.clean.fastq > T3_pineC.fastq
+
+# DONE TO HERE
 
 
 Cleaning up the directory:
 
-    $ rm GOAG.clean.fastq
-    $ rm miderrors_GOAG.clean.fastq
-    $ rm parsereport_GOAG.clean.fastq
+    $ rm T5_PC.clean.fastq
+    $ rm miderrors_T5_PC.clean.fastq
+    $ rm parsereport_T5_PC.clean.fastq
+
+    $ rm B_T5_PC.clean.fastq
+    $ rm miderrors_B_T5_PC.clean.fastq
+    $ rm parsereport_B_T5_PC.clean.fastq
+
+# DONE TO HERE
 
 
 ## Splitting fastq by individual ID
 
 Make ids file
 
-    $ cut -f 3 -d "," barcodeKey_CLEAN_desertTortoises.csv | grep "_" > GOAG_ids_noheader.txt
-    # Note: 698 individuals
+    $ cut -f 3 -d "," barcodeKey_lib11_timema5_pineC.csv | grep "_" > T3_pineC_ids_noheader.txt
+
+    # Note: 546 individuals
 
 
 Split fastqs by individual, put in a new directory
 
     $ mkdir raw_fastqs
-    $ perl splitFastq_universal_regex.pl GOAG_ids_noheader.txt parsed_GOAG.clean.fastq &
+    $ perl splitFastq_universal_regex.pl T3_pineC_ids_noheader.txt parsed_GOAG.clean.fastq &
 
 Zip the parsed*fastq files for now, but delete once patterns and qc are verified:
 
