@@ -78,8 +78,6 @@ Barcode keyfile is `/working/parchman/Tcristinae_2022/barcodeKey_lib11_timema5_p
     $ perl parse_barcodes768.pl barcodeKey_lib11_timema5_pineC.csv B_T5_PC.clean.fastq A00 &
 
 
-# DONE TO HERE
-
 
 `NOTE`: the A00 object is the code that identifies the sequencer (first three characters after the @ in the fastq identifier).
 
@@ -98,9 +96,7 @@ Barcode keyfile is `/working/parchman/Tcristinae_2022/barcodeKey_lib11_timema5_p
 
 Each fastq file has data for the same set of individuals. Combining those two files here with `cat` to make one file with all data:
 
-    $ cat T5_PC.clean.fastq B_T5_PC.clean.fastq > T3_pineC.fastq
-
-# DONE TO HERE
+    $ cat parsed_B_T5_PC.clean.fastq parsed_T5_PC.clean.fastq > parsed_Tc3_pineC.fastq &
 
 
 Cleaning up the directory:
@@ -128,7 +124,7 @@ Make ids file
 Split fastqs by individual, put in a new directory
 
     $ mkdir raw_fastqs
-    $ perl splitFastq_universal_regex.pl T3_pineC_ids_noheader.txt parsed_GOAG.clean.fastq &
+    $ perl splitFastq_universal_regex.pl T3_pineC_ids_noheader.txt parsed_Tc3_pineC.fastq &
 
 Zip the parsed*fastq files for now, but delete once patterns and qc are verified:
 
