@@ -28,9 +28,8 @@ Being executed on ponderosa using tapioca pipeline. Commands in bash script, exe
     $ module load bowtie2/2.2.5
     $ bash cleaning_bash.sh &
 
-After GOAG.clean.fastq has been produced, clean out duplicate raw data:
+Afte clean.fastq has been produced, clean out duplicate raw data:
 
-    $ rm -rf GOAG-lib10_S1_L001_R1_001.fastq
  
 Number of reads **before** cleaning:
 
@@ -43,7 +42,9 @@ Number of reads **after** cleaning:
     $ less number_of_cleanreads.txt
     # 
 
-`NOTE`: All looked well with `T5_S1_L001_R1_001.fastq`, below processing cleaning step for `T5_S1_L002_R1_001.fastq`.
+### DNAs were sequenced on three libraries. Two of those had only timema (T6 and T7), one also had pinus rigida (T5). 
+
+### First, processed T5, cleaning steps for `T5_S1_L002_R1_001.fastq`:
 
 Being executed on ponderosa using tapioca pipeline. Commands in bash script, executed as below (4/2/22).
 
@@ -51,7 +52,7 @@ Being executed on ponderosa using tapioca pipeline. Commands in bash script, exe
     $ module load bowtie2/2.2.5
     $ bash cleaning_bash.sh &
 
-After GOAG.clean.fastq has been produced, clean out duplicate raw data:
+After clean.fastq has been produced, clean out duplicate raw data:
 
     $ rm -rf T5_S1_L002_R1_001.fastq
  
@@ -65,6 +66,41 @@ Number of reads **after** cleaning:
     $ grep -c "^@" B_T5_PC.clean.fastq > number_of_cleanreadsB.txt &
     $ less number_of_cleanreadsB.txt
     # 
+
+### Second, cleaning steps for T6 and T7 `T6_S1_L001_R1_001.fastq.gz`,`T6_S1_L001_R1_001.fastq.gz`, stored at: 
+
+/archive/parchman_lab/rawdata_to_backup/timema_EcoEvoGBS_7_13_22/
+
+Being executed on ponderosa using tapioca pipeline. Commands in bash script, executed as below (7/18/22).
+
+For T6 (`/working/parchman/Tcristinae_2022/T6`):
+    $ module load fqutils/0.4.1
+    $ module load bowtie2/2.2.5
+    $ bash cleaning_bash6.sh &
+
+And for T7(`/working/parchman/Tcristinae_2022/T7`):
+
+    $ module load fqutils/0.4.1
+    $ module load bowtie2/2.2.5
+    $ bash cleaning_bash7.sh &
+
+# Done to here 7/19/22
+
+After clean.fastq has been produced, clean out duplicate raw data:
+
+    $ rm -rf T5_S1_L002_R1_001.fastq
+ 
+Number of reads **before** cleaning:
+
+    $ grep -c "^@" T5_S1_L002_R1_001.fastq > number_of_rawreadsB.txt &
+    $ less number_of_rawreadsB.txt
+    # 
+Number of reads **after** cleaning:
+
+    $ grep -c "^@" B_T5_PC.clean.fastq > number_of_cleanreadsB.txt &
+    $ less number_of_cleanreadsB.txt
+    # 
+
 
 ## Barcode parsing:
 
@@ -130,7 +166,6 @@ Zip the parsed*fastq files for now, but delete once patterns and qc are verified
 
     $ gzip GOAG.clean.fastq
 
-# Done to here 11/16/21
 
 Total reads for GOAG (698 individuals)
 
