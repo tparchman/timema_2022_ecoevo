@@ -74,6 +74,7 @@ Number of reads **after** cleaning:
 Being executed on ponderosa using tapioca pipeline. Commands in bash script, executed as below (7/18/22).
 
 For T6 (`/working/parchman/Tcristinae_2022/T6`):
+
     $ module load fqutils/0.4.1
     $ module load bowtie2/2.2.5
     $ bash cleaning_bash6.sh &
@@ -106,6 +107,7 @@ Number of reads **after** cleaning:
 
 Barcode keyfile is `/working/parchman/Tcristinae_2022/barcodeKey_lib11_timema5_pineC.csv`
 
+For T5:
 2 lanes need to be parsed:
 `T5_PC.clean.fastq` and  `B_T5_PC.clean.fastq`
 
@@ -144,6 +146,31 @@ Cleaning up the directory:
     $ rm B_T5_PC.clean.fastq
     $ rm miderrors_B_T5_PC.clean.fastq
     $ rm parsereport_B_T5_PC.clean.fastq
+
+### For T6 and T7
+2 lanes need to be parsed:
+`T5_PC.clean.fastq` and  `B_T5_PC.clean.fastq`
+
+    $ perl parse_barcodes768.pl library12_timema6_pineA.csv T6.clean.fastq A00 &
+
+    $ perl parse_barcodes768.pl library13_timema7_pineA.csv T7.clean.fastq A00 &
+
+
+
+`NOTE`: the A00 object is the code that identifies the sequencer (first three characters after the @ in the fastq identifier).
+
+    $ less parsereport_B_T5_PC.clean.fastq
+    #Good mids count: 520687693
+    #Bad mids count: 37522471
+    #Number of seqs with potential MSE adapter in seq: 200352
+    #Seqs that were too short after removing MSE and beyond: 354
+
+    $ less parsereport_T5_PC.clean.fastq
+    #Good mids count: 521146575
+    #Bad mids count: 38505020
+    #Number of seqs with potential MSE adapter in seq: 193168
+    #Seqs that were too short after removing MSE and beyond: 317
+
 
 # DONE TO HERE
 
