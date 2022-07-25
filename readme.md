@@ -149,9 +149,9 @@ Cleaning up the directory:
 
 ### For T6 and T7
 2 lanes need to be parsed:
-`T5_PC.clean.fastq` and  `B_T5_PC.clean.fastq`
+`T6.clean.fastq` and  `T7.clean.fastq`
 
-    $ perl parse_barcodes768.pl library12_timema6_pineA.csv T6.clean.fastq A00 &
+    $ nohup perl parse_barcodes768.pl bc_key_library12_timema6_final.csv T6.clean.fastq A00 &>/dev/null &
 
     $ perl parse_barcodes768.pl library13_timema7_pineA.csv T7.clean.fastq A00 &
 
