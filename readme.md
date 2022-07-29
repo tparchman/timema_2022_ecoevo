@@ -153,9 +153,45 @@ Cleaning up the directory:
 
     $ nohup perl parse_barcodes768.pl bc_key_library12_timema6_final.csv T6.clean.fastq A00 &>/dev/null &
 
-    $ perl parse_barcodes768.pl library13_timema7_pineA.csv T7.clean.fastq A00 &
+    $ nohup perl parse_barcodes768.pl library13_timema7_pineB.csv T7.clean.fastq A00 &>/dev/null &
 
 
+**Splitting big fastqs into smaller files to speed up parsing**
+
+T7.clean.fastq has 5961989268 lines. Dividing by 11, making smaller files with 541999024 lines each (this is cleanly divided by 4):
+
+    $ split -l 541999024 T7.clean.fastq
+
+### running parsing for 10 smaller files:
+
+    $ nohup perl parse_barcodes768.pl library13_timema7_pineB.csv xaa A00 &>/dev/null &
+
+    $ nohup perl parse_barcodes768.pl library13_timema7_pineB.csv xab A00 &>/dev/null &
+
+    $ nohup perl parse_barcodes768.pl library13_timema7_pineB.csv xac A00 &>/dev/null &
+
+    $ nohup perl parse_barcodes768.pl library13_timema7_pineB.csv xad A00 &>/dev/null &
+
+    $ nohup perl parse_barcodes768.pl library13_timema7_pineB.csv xae A00 &>/dev/null &
+
+    $ nohup perl parse_barcodes768.pl library13_timema7_pineB.csv xaf A00 &>/dev/null &
+
+# DONE TO HERE 7/27/22 testing split
+
+    $ nohup perl parse_barcodes768.pl library13_timema7_pineB.csv xag A00 &>/dev/null &
+
+    $ nohup perl parse_barcodes768.pl library13_timema7_pineB.csv xah A00 &>/dev/null &
+
+    $ nohup perl parse_barcodes768.pl library13_timema7_pineB.csv xai A00 &>/dev/null &
+
+    $ nohup perl parse_barcodes768.pl library13_timema7_pineB.csv xaj A00 &>/dev/null &
+
+    $ nohup perl parse_barcodes768.pl library13_timema7_pineB.csv xak A00 &>/dev/null &
+
+    $ nohup perl parse_barcodes768.pl library13_timema7_pineB.csv xal A00 &>/dev/null &
+
+
+### catting together into one file:
 
 `NOTE`: the A00 object is the code that identifies the sequencer (first three characters after the @ in the fastq identifier).
 
