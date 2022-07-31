@@ -85,8 +85,6 @@ And for T7(`/working/parchman/Tcristinae_2022/T7`):
     $ module load bowtie2/2.2.5
     $ bash cleaning_bash7.sh &
 
-# Done to here 7/19/22
-
 After clean.fastq has been produced, clean out duplicate raw data:
 
     $ rm -rf T5_S1_L002_R1_001.fastq
@@ -153,6 +151,11 @@ Cleaning up the directory:
 
     $ nohup perl parse_barcodes768.pl bc_key_library12_timema6_final.csv T6.clean.fastq A00 &>/dev/null &
 
+    $ less parsereport_T6.clean.fastq
+    Good mids count: 1311531766
+    Bad mids count: 220007814
+    ## note bad mids count is a bit high.
+
     $ nohup perl parse_barcodes768.pl library13_timema7_pineB.csv T7.clean.fastq A00 &>/dev/null &
 
 
@@ -162,7 +165,7 @@ T7.clean.fastq has 5961989268 lines. Dividing by 11, making smaller files with 5
 
     $ split -l 541999024 T7.clean.fastq
 
-### running parsing for 10 smaller files:
+### running parsing for 11 smaller files:
 
     $ nohup perl parse_barcodes768.pl library13_timema7_pineB.csv xaa A00 &>/dev/null &
 
@@ -194,7 +197,10 @@ T7.clean.fastq has 5961989268 lines. Dividing by 11, making smaller files with 5
 
     $ nohup cat parsed_xa* > parsed_T7.clean.fastq &>/dev/null &
 
-# DONE TO HERE 7/27/22 testing split
+    $ less parsereport_T7.clean.fastq
+    Good mids count: 1381529754
+    Bad mids count: 108966022
+    ## note bad mids count is a bit high.
 
 `NOTE`: the A00 object is the code that identifies the sequencer (first three characters after the @ in the fastq identifier).
 
@@ -211,14 +217,9 @@ T7.clean.fastq has 5961989268 lines. Dividing by 11, making smaller files with 5
     #Seqs that were too short after removing MSE and beyond: 317
 
 
-# DONE TO HERE
-
-
 ## Splitting fastq by individual ID
 
-###Make ids file
-
-###T5, T6, and T7
+### Make ids files for T5, T6, and T7
 
 **T5**
 
@@ -230,20 +231,20 @@ T7.clean.fastq has 5961989268 lines. Dividing by 11, making smaller files with 5
 
     $ cut -f 3 -d "," bc_key_library12_timema6_final.csv | grep "_" > T6_noheader.txt
 
-    # Note: XXX individuals
+    # Note: 672 individuals
 
 **T7**
 
     $ cut -f 3 -d "," library13_timema7_pineB.csv | grep "_" > T7_ids_noheader.txt
 
-    # Note: XXX individuals
+    # Note: 672 individuals, including some pinus individuals that have been removed.
 
-Split fastqs by individual, put in a new directory
+## Split fastqs by individual, put in a new directory
 
 **T5**
 
     $ mkdir splitfastqs
-    $ perl splitFastq_universal_regex.pl T3_pineC_ids_noheader.txt parsed_Tc3_pineC.fastq &
+    $ nohup perl splitFastq_universal_regex.pl T3_pineC_ids_noheader.txt parsed_Tc3_pineC.fastq &>/dev/null &
 
 **T6**
 
@@ -259,21 +260,11 @@ Delete clean.fastq files:
 
     $ rm -rf *.clean.fastq
 
+Delete parsed*fastq files:
 
-Total reads for GOAG (698 individuals)
-
-    $ grep -c "^@" raw_fastqs/*fastq > seqs_per_ind.txt
-
-Summarize in R
-
-    R
-    dat <- read.delim("seqs_per_ind.txt", header=F, sep=":")
-        dim(dat)
-        head(dat)
-        
-    sum(dat[,2])
+    $ rm -rf parsed_*.fastq
         
 
 Zip fastqs:
 
-    $ gzip raw_fastqs/*fastq
+    $ nohup gzip raw_fastqs/*fastq &>/dev/null &
