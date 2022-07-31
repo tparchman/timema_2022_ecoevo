@@ -176,7 +176,6 @@ T7.clean.fastq has 5961989268 lines. Dividing by 11, making smaller files with 5
 
     $ nohup perl parse_barcodes768.pl library13_timema7_pineB.csv xaf A00 &>/dev/null &
 
-# DONE TO HERE 7/27/22 testing split
 
     $ nohup perl parse_barcodes768.pl library13_timema7_pineB.csv xag A00 &>/dev/null &
 
@@ -192,6 +191,10 @@ T7.clean.fastq has 5961989268 lines. Dividing by 11, making smaller files with 5
 
 
 ### catting together into one file:
+
+    $ nohup cat parsed_xa* > parsed_T7.clean.fastq &>/dev/null &
+
+# DONE TO HERE 7/27/22 testing split
 
 `NOTE`: the A00 object is the code that identifies the sequencer (first three characters after the @ in the fastq identifier).
 
@@ -213,21 +216,48 @@ T7.clean.fastq has 5961989268 lines. Dividing by 11, making smaller files with 5
 
 ## Splitting fastq by individual ID
 
-Make ids file
+###Make ids file
+
+###T5, T6, and T7
+
+**T5**
 
     $ cut -f 3 -d "," barcodeKey_lib11_timema5_pineC.csv | grep "_" > T3_pineC_ids_noheader.txt
 
     # Note: 546 individuals
 
+**T6**
+
+    $ cut -f 3 -d "," bc_key_library12_timema6_final.csv | grep "_" > T6_noheader.txt
+
+    # Note: XXX individuals
+
+**T7**
+
+    $ cut -f 3 -d "," library13_timema7_pineB.csv | grep "_" > T7_ids_noheader.txt
+
+    # Note: XXX individuals
 
 Split fastqs by individual, put in a new directory
 
-    $ mkdir raw_fastqs
+**T5**
+
+    $ mkdir splitfastqs
     $ perl splitFastq_universal_regex.pl T3_pineC_ids_noheader.txt parsed_Tc3_pineC.fastq &
 
-Zip the parsed*fastq files for now, but delete once patterns and qc are verified:
+**T6**
 
-    $ gzip GOAG.clean.fastq
+    $ mkdir splitfastqs
+    $ nohup perl splitFastq_universal_regex.pl T6_noheader.txt parsed_T6.clean.fastq &>/dev/null &
+
+**T7**
+
+    $ mkdir splitfastqs
+    $ nohup perl splitFastq_universal_regex.pl T7_ids_noheader.txt parsed_T7.clean.fastq &>/dev/null &
+    
+Delete clean.fastq files:
+
+    $ rm -rf *.clean.fastq
 
 
 Total reads for GOAG (698 individuals)
